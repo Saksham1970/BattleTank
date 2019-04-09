@@ -8,31 +8,18 @@
 
 void ATankAIController::BeginPlay() {
 	Super::BeginPlay();
-	ATank* ControlledTank = GetControlledTank();
-	ATank* PlayerTank = GetPlayerTank();
-	if (!ControlledTank) {
-		UE_LOG(LogTemp, Error, TEXT("AIController Tank not Possessed"));
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("AIController Tank Enemy : %s"), *PlayerTank->GetName());
-	}
+	
+	
 }
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	GetControlledTank()->AimAt(GetPlayerTank()->GetTransform().GetLocation());
-}
-ATank* ATankAIController::GetControlledTank() const {
-	return Cast<ATank>(GetPawn());
-}
+	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = Cast<ATank>(GetPawn());
 
-ATank* ATankAIController::GetPlayerTank() const
-{
-	APawn* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
 	if (PlayerTank) {
-		return Cast<ATank>(PlayerTank);
-	}
-	else {
-		return nullptr;
+		ControlledTank->AimAt(PlayerTank->GetTransform().GetLocation());
+		ControlledTank->Fire(); // TODO limit firing rate
+
 	}
 }
