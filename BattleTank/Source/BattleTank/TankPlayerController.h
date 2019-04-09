@@ -28,7 +28,7 @@ private:
 	UPROPERTY(EditAnywhere)
 		int32 CrosshairXLocation = 0.5;
 	UPROPERTY(EditAnywhere)
-		int32 LineTraceRange = 100000;
+		int32 LineTraceRange = 1000000;
 	UPROPERTY(EditAnywhere)
 		int32 CrosshairYLocation = 0.333333;
 };
