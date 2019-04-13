@@ -28,6 +28,7 @@ public:
 		void SetTurretReference(UTankTurret* TurretToSet);
 
 protected:
+	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 	
 private:
