@@ -23,7 +23,7 @@ void ATankAIController::Tick(float DeltaTime)
 		auto TankAimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 		if (!ensure(TankAimingComponent)) { return; }
 		TankAimingComponent->AimAt(PlayerTank->GetTransform().GetLocation());
-		ControlledTank->Fire(); // TODO limit firing rate
+		TankAimingComponent->Fire(); // TODO limit firing rate
 
 	}
 }
