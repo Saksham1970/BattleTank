@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 class ATank;
+class UTankAimingComponent;
 /**
  * 
  */
@@ -40,7 +41,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 		float LineTraceRange = 1000000;
-
+	UTankAimingComponent* AimingComponent = nullptr;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
 	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
 };

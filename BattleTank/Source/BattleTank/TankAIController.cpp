@@ -3,6 +3,7 @@
 
 #include "TankAIController.h"
 #include "Engine/World.h"
+#include "TankAimingComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "Tank.h"
 
@@ -19,7 +20,9 @@ void ATankAIController::Tick(float DeltaTime)
 
 	if (PlayerTank) {
 		MoveToActor(PlayerTank, AcceptanceRadius);
-		ControlledTank->AimAt(PlayerTank->GetTransform().GetLocation());
+		auto TankAimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+		if (!ensure(TankAimingComponent)) { return; }
+		TankAimingComponent->AimAt(PlayerTank->GetTransform().GetLocation());
 		ControlledTank->Fire(); // TODO limit firing rate
 
 	}
