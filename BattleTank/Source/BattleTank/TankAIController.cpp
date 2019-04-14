@@ -20,10 +20,13 @@ void ATankAIController::Tick(float DeltaTime)
 
 	if (PlayerTank) {
 		MoveToActor(PlayerTank, AcceptanceRadius);
-		auto TankAimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
-		if (!ensure(TankAimingComponent)) { return; }
-		TankAimingComponent->AimAt(PlayerTank->GetTransform().GetLocation());
-		TankAimingComponent->Fire(); // TODO limit firing rate
+		auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
+		if (!ensure(AimingComponent)) { return; }
+		AimingComponent->AimAt(PlayerTank->GetTransform().GetLocation());
+		if (AimingComponent->GetFiringState() == EFiringState::Locked)
+		{
+			AimingComponent->Fire(); // TODO limit firing rate
+		}
 
 	}
 }
