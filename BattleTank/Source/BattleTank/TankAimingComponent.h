@@ -11,7 +11,8 @@ enum class EFiringState : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	NoAmmo
 };
 
 class UTankBarrel;
@@ -34,16 +35,19 @@ public:
 
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Fire();
 
 	EFiringState GetFiringState() const;
 
+	
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringState FiringState = EFiringState::Aiming;
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int32 GetAmmo() const;
 
 private:
 	UTankBarrel* Barrel = nullptr;
@@ -67,4 +71,6 @@ private:
 
 	bool IsBarrelMoving();
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		int32 Ammo = 3;
 };

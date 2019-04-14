@@ -41,7 +41,7 @@ void UTankTrack::SetThrottle(float Throttle)
 
 void UTankTrack::DriveTrack()
 {
-	UE_LOG(LogClass, Warning, TEXT("I'm hit... %f"), CurrentThrottle);
+	
 
 	auto ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
 	auto ForceLocation = GetComponentLocation();
